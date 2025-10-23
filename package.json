@@ -1,7 +1,7 @@
 {
-  "name": "Project-Title",
+  "name": "project-title",
   "version": "1.0.0",
-  "description": "",
+  "description": "This project is a **decentralized identity verification platform** built using blockchain technology.  \r It allows users to prove their identity through **Verifiable Credentials (VCs)** that are **stored off-chain** (for privacy) and **anchored on-chain** via cryptographic proofs.",
   "main": "index.js",
   "scripts": {
     "test": "npx hardhat test",
@@ -19,9 +19,20 @@
     "dotenv": "^16.0.3",
     "ethereum-waffle": "^3.0.0",
     "ethers": "^5.0.0",
-    "hardhat": "^2.14.0"
+    "hardhat": "^2.26.3"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.8.3"
-  }
-} 
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vraj62023/On-chain-Identity-Verification.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vraj62023/On-chain-Identity-Verification/issues"
+  },
+  "homepage": "https://github.com/vraj62023/On-chain-Identity-Verification#readme"
+}
