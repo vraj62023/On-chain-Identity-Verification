@@ -1,171 +1,57 @@
-# 🛡️ On-Chain Identity Verification System
+# Sample Hardhat 3 Beta Project (`mocha` and `ethers`)
 
-## 🔍 Overview
+This project showcases a Hardhat 3 Beta project using `mocha` for tests and the `ethers` library for Ethereum interactions.
 
-This project is a **decentralized identity verification platform** built using blockchain technology.  
-It allows users to prove their identity through **Verifiable Credentials (VCs)** that are **stored off-chain** (for privacy) and **anchored on-chain** via cryptographic proofs.
+To learn more about the Hardhat 3 Beta, please visit the [Getting Started guide](https://hardhat.org/docs/getting-started#getting-started-with-hardhat-3). To share your feedback, join our [Hardhat 3 Beta](https://hardhat.org/hardhat3-beta-telegram-group) Telegram group or [open an issue](https://github.com/NomicFoundation/hardhat/issues/new) in our GitHub issue tracker.
 
-The system ensures:
-- ✅ Trustless identity verification (no central authority)
-- 🔒 Privacy preservation (no personal data on-chain)
-- 🧾 Decentralized Identifiers (DIDs)
-- 🧠 Zero-Knowledge Proof (zk-SNARK) support (for privacy-preserving claims)
+## Project Overview
 
----
+This example project includes:
 
-## ⚙️ Workflow
+- A simple Hardhat configuration file.
+- Foundry-compatible Solidity unit tests.
+- TypeScript integration tests using `mocha` and ethers.js
+- Examples demonstrating how to connect to different types of networks, including locally simulating OP mainnet.
 
-### Step 1: Credential Issuance
-1. The user submits identity details to a **trusted attester** (e.g., KYC authority).
-2. The attester generates a **Verifiable Credential (VC)** JSON.
-3. The VC is uploaded to **IPFS**, and a `cidHash` is generated.
-4. The attester signs `(subjectAddress, cidHash, expiry)` using its private key.
-5. The signature is returned to the user.
+## Usage
 
-### Step 2: On-Chain Attestation
-6. The user submits this signed attestation to the **smart contract (`Attestations.sol`)**.
-7. The contract verifies the attester’s signature and stores the `cidHash` with metadata.
+### Running Tests
 
-### Step 3: Verification
-8. A verifier queries the contract to check if an attestation is valid (not expired or revoked).
-9. The verifier retrieves the VC JSON from IPFS and verifies the attester’s signature.
-10. *(Optional)* The user can later prove specific claims using **zero-knowledge proofs**.
+To run all the tests in the project, execute the following command:
 
----
+```shell
+npx hardhat test
+```
 
-## 🧱 System Architecture
+You can also selectively run the Solidity or `mocha` tests:
 
-| Component | Description | Technology |
-|------------|--------------|-------------|
-| **Smart Contract** | Stores attestations and verifies signatures | Solidity (Hardhat) |
-| **Attester Service** | Issues credentials, uploads them to IPFS, and signs attestations | Node.js + Ethers.js + NFT.Storage |
-| **Frontend (User + Verifier)** | UI for requesting, submitting, and verifying credentials | React (Vite) + Ethers.js |
-| **Storage Layer** | Secure, decentralized VC storage | IPFS (via NFT.Storage) |
-| **Blockchain Network** | On-chain registry for attestations | Ethereum Testnet (Hardhat / Sepolia) |
+```shell
+npx hardhat test solidity
+npx hardhat test mocha
+```
 
----
+### Make a deployment to Sepolia
 
-## 🧠 Design Choices
+This project includes an example Ignition module to deploy the contract. You can deploy this module to a locally simulated chain or to Sepolia.
 
-### 🪙 Blockchain
-- **Ethereum / EVM-based**: mature, testnet-friendly, and widely supported.
-- **Alternative**: Polygon for lower gas fees.
+To run the deployment to a local chain:
 
-### 🧩 Smart Contract Framework
-- **Hardhat**  
-  - Local development & testing  
-  - Built-in Ethers.js support  
-  - Clean Solidity debugging and deployment
+```shell
+npx hardhat ignition deploy ignition/modules/Counter.ts
+```
 
-### 🔐 Libraries
-- **OpenZeppelin** for `Ownable` and `ECDSA`
-  - Secure cryptographic implementations  
-  - Community-audited code
+To run the deployment to Sepolia, you need an account with funds to send the transaction. The provided Hardhat configuration includes a Configuration Variable called `SEPOLIA_PRIVATE_KEY`, which you can use to set the private key of the account you want to use.
 
-### 🌐 Off-chain Storage
-- **IPFS via NFT.Storage**
-  - Decentralized and permanent storage  
-  - Generates unique CID hashes for every VC  
-  - Free tier for development
+You can set the `SEPOLIA_PRIVATE_KEY` variable using the `hardhat-keystore` plugin or by setting it as an environment variable.
 
-### 💻 Frontend
-- **React (Vite)** for fast, modular UI development  
-- **Ethers.js** for wallet and contract interaction
+To set the `SEPOLIA_PRIVATE_KEY` config variable using `hardhat-keystore`:
 
-### 🧾 Attester Backend
-- **Node.js (Express)** for REST API  
-- **dotenv** for private key management  
-- **nft.storage** package for uploading to IPFS
+```shell
+npx hardhat keystore set SEPOLIA_PRIVATE_KEY
+```
 
-### 🧮 Zero-Knowledge Proofs *(Future Integration)*
-- **Circom + SnarkJS**  
-  - Enables privacy-preserving claims  
-  - Example: prove “Age > 18” without revealing DOB
+After setting the variable, you can run the deployment with the Sepolia network:
 
-
-## 🧰 Tech Stack
-
-| Category | Tool / Library |
-|-----------|----------------|
-| Smart Contracts | Solidity, Hardhat, OpenZeppelin |
-| Blockchain Interaction | Ethers.js |
-| Backend | Node.js, Express |
-| Frontend | React (Vite) |
-| Storage | IPFS (NFT.Storage) |
-| ZK Proofs (Future) | Circom, SnarkJS |
-| Testing | Mocha, Chai |
-
----
-
-## 🧪 Testing Plan
-
-1. **Smart Contract Unit Tests**
-   - Signature validation
-   - Attestation storage & retrieval
-   - Expiry and revocation logic
-
-2. **Integration Tests**
-   - Attester issues credential → `/issue` endpoint
-   - User submits attestation on-chain
-   - Verifier checks validity and retrieves from IPFS
-
-3. **Frontend Testing**
-   - UI interaction with wallet (Metamask)
-   - Credential upload and verification flows
-
-
-
-## 🚀 Future Improvements
-
-- Implement **DID** method (`did:pkh`, `did:key`)
-- Add **zk-proof verification contract**
-- **DAO-based attester registration**
-- Wallet integration via **RainbowKit / Wagmi**
-- **The Graph** integration for indexing attestations
-
-
-## 📦 Development Setup
-
-### 🪜 Prerequisites
-- Node.js v18+
-- Git
-- Metamask (for testnet)
-- Hardhat
-
-### 🛠️ Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/<your-username>/onchain-identity-verification.git
-cd onchain-identity-verification
-
-# Install dependencies
-npm install
-
-# Compile contracts
-npx hardhat compile
-
-# Run local blockchain
-npx hardhat node
-
-# Deploy contracts
-npx hardhat run scripts/deploy.js --network localhost
-
-# Start frontend
-cd frontend
-npm run dev
-📄 References
-W3C Verifiable Credentials Data Model
-
-EIP-712: Typed Structured Data Hashing
-
-OpenZeppelin Contracts Documentation
-
-NFT.Storage Docs
-
-Circom + SnarkJS Docs
-
-👨‍💻 Author
-Vipin Raj
-vraj62023@gmail.com
-
+```shell
+npx hardhat ignition deploy --network sepolia ignition/modules/Counter.ts
+```

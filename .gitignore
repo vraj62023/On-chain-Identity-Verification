@@ -1,34 +1,20 @@
-# Dependency directories
-node_modules/
-.env
-package-lock.json
+# Node modules
+/node_modules
 
-# Hardhat artifacts
-artifacts/
-cache/
-typechain-types/
+# Compilation output
+/dist
 
-# IDE files
-.vscode/
-.idea/
-*.iml
-*.swp
-*.swo
+# pnpm deploy output
+/bundle
 
-# Log files
-logs/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Hardhat Build Artifacts
+/artifacts
 
-# Coverage directory used by tools like istanbul
-coverage/
-coverage.json
+# Hardhat compilation (v2) support directory
+/cache
 
-# Misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# Typechain output
+/types
+
+# Hardhat coverage reports
+/coverage

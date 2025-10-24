@@ -1,38 +1,35 @@
 {
-  "name": "project-title",
+  "name": "on-chain-identity-verification",
   "version": "1.0.0",
-  "description": "This project is a **decentralized identity verification platform** built using blockchain technology.  \r It allows users to prove their identity through **Verifiable Credentials (VCs)** that are **stored off-chain** (for privacy) and **anchored on-chain** via cryptographic proofs.",
   "main": "index.js",
   "scripts": {
-    "test": "npx hardhat test",
-    "compile": "npx hardhat compile",
-    "deploy": "npx hardhat run scripts/deploy.js --network coreTestnet"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
-  "devDependencies": {
-    "@nomicfoundation/hardhat-toolbox": "^2.0.2",
-    "@nomiclabs/hardhat-ethers": "^2.0.0",
-    "@nomiclabs/hardhat-waffle": "^2.0.0",
-    "chai": "^4.3.7",
-    "dotenv": "^16.0.3",
-    "ethereum-waffle": "^3.0.0",
-    "ethers": "^5.0.0",
-    "hardhat": "^2.26.3"
-  },
-  "dependencies": {
-    "@openzeppelin/contracts": "^4.8.3"
-  },
-  "directories": {
-    "test": "test"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vraj62023/On-chain-Identity-Verification.git"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/vraj62023/On-chain-Identity-Verification/issues"
   },
-  "homepage": "https://github.com/vraj62023/On-chain-Identity-Verification#readme"
+  "homepage": "https://github.com/vraj62023/On-chain-Identity-Verification#readme",
+  "description": "",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-ignition": "^3.0.3",
+    "@nomicfoundation/hardhat-toolbox-mocha-ethers": "^3.0.0",
+    "@types/chai": "^4.3.20",
+    "@types/chai-as-promised": "^8.0.2",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^22.18.12",
+    "chai": "^5.3.3",
+    "ethers": "^6.15.0",
+    "forge-std": "github:foundry-rs/forge-std#v1.9.4",
+    "hardhat": "^3.0.9",
+    "mocha": "^11.7.4",
+    "typescript": "~5.8.0"
+  },
+  "type": "module"
 }
