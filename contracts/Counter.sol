@@ -8,8 +8,9 @@ contract Counter {
 
   function inc() public {
     x++;
-    emit Increment(1);
+    emit Increment(2);
   }
+//function incBy done
 
   function incBy(uint by) public {
     require(by > 0, "incBy: increment should be positive");
