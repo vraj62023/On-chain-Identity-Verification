@@ -29,4 +29,16 @@ contract CounterTest is Test {
     vm.expectRevert();
     counter.incBy(0);
   }
+  function testFuzz_Inc(uint8 x) public {
+    for (uint8 i = 0; i < x; i++) {
+      counter.inc();
+    }
+    require(counter.x() == x, "Value after calling inc x times should be x");
+  }
+  function testFuzz_Inc(uint8 x) public {
+    for (uint8 i = 0; i < x; i++) {
+      counter.inc();
+    }
+    require(counter.x() == x, "Value after calling inc x times should be x");
+  }
 }
