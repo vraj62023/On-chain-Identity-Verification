@@ -23,12 +23,7 @@ To run all the tests in the project, execute the following command:
 npx hardhat test
 ```
 
-You can also selectively run the Solidity or `mocha` tests:
 
-```shell
-npx hardhat test solidity
-npx hardhat test mocha
-```
 
 ### Make a deployment to Sepolia
 
