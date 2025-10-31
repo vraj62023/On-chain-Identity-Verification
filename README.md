@@ -43,3 +43,8 @@ After setting the variable, you can run the deployment with the Sepolia network:
 ```shell
 npx hardhat ignition deploy --network sepolia ignition/modules/Counter.ts
 ```
+
+##contract details
+0x31727618DE1BD239961c36fe71a98A0C411E68F2
+<img width="1905" height="903" alt="image" src="https://github.com/user-attachments/assets/81a7f6cf-3479-4bf1-aca2-17a7193ffd92" />
+
