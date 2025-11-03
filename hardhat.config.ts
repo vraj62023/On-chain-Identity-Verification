@@ -1,42 +1,30 @@
-import type { HardhatUserConfig } from "hardhat/config";
+/**
+ * @type import('hardhat/config').HardhatUserConfig
+ */
 
-import hardhatToolboxMochaEthersPlugin from "@nomicfoundation/hardhat-toolbox-mocha-ethers";
-import { configVariable } from "hardhat/config";
+require("@nomiclabs/hardhat-waffle");
+require("@nomiclabs/hardhat-ethers");
+require("dotenv").config();
 
-const config: HardhatUserConfig = {
-  plugins: [hardhatToolboxMochaEthersPlugin],
-  solidity: {
-    profiles: {
-      default: {
-        version: "0.8.28",
-      },
-      production: {
-        version: "0.8.28",
-        settings: {
-          optimizer: {
-            enabled: true,
-            runs: 200,
-          },
-        },
-      },
-    },
-  },
+module.exports = {
+  solidity: "0.8.17",
   networks: {
-    hardhatMainnet: {
-      type: "edr-simulated",
-      chainType: "l1",
+    coreTestnet: {
+      url: "https://rpc.test2.btcs.network",
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+      chainId: 1114,
     },
-    hardhatOp: {
-      type: "edr-simulated",
-      chainType: "op",
+    hardhat: {
+      chainId: 1338
     },
-    sepolia: {
-      type: "http",
-      chainType: "l1",
-      url: configVariable("SEPOLIA_RPC_URL"),
-      accounts: [configVariable("SEPOLIA_PRIVATE_KEY")],
-    },
+    localhost: {
+      url: "http://127.0.0.1:8545"
+    }
+  },
+  paths: {
+    artifacts: "./artifacts",
+    cache: "./cache",
+    sources: "./contracts",
+    tests: "./test",
   },
 };
-
-export default config;
